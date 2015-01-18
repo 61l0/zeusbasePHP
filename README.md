@@ -9,7 +9,7 @@ zeusbasePHP
 
 **XCode Based Project for IOS - Speedtest**
 
-![App Icon](https://github.com/logo.png "App Icon")
+![App Icon](https://github.com/ZeusbaseWeb/zeusbasePHP/blob/master/assets/images/zeusbasePHP_AppLogo.png "App Icon")
 
 > Version 1.0
 
