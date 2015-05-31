@@ -1,0 +1,533 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>CodeIgniter CRUD - Data Management System</title>
+        <link type="text/css" rel="stylesheet" href="google-code-prettify/prettify.css"/>
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <script src="jquery/jquery-1.8.2.min.js"></script>
+        <script type="text/javascript" src="google-code-prettify/prettify.js"></script>
+    </head>
+    <style>
+        .form-horizontal .control-group {
+            margin-bottom: 7px;
+        }
+        .page-header, section > .lead {
+            color: #5A5A5A;
+        }
+    </style>
+    <body onload="prettyPrint()">
+        <div class="container-fluid fill">
+            <div class="row-fluid" style="margin-top: 15px;
+                 box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25); 
+                 border: 1px solid #e8e8e8; 
+                 -moz-border-radius: 7px; 
+                 -khtml-border-radius: 7px; 
+                 -webkit-border-radius: 7px; 
+                 border-radius: 7px;margin-bottom: 20px;">
+                <div style="padding-left: 10px; padding-right: 10px;">
+                    <div class="page-header" >
+                        <h1>CodeIgniter CRUD - Data Management System</h1>
+                    </div>
+                    <div>
+                        <ul>
+                            <li>Created: 2013/08/10</li>
+                            <li>latest Update: 2013/08/10</li>
+                            <li>By: vudoanthang</li>
+                            <li>Email: <a href="mailto:vudoanthang83@gmail.com">vudoanthang83@gmail.com</a>
+                            </li>
+                        </ul>
+                        <br/>
+                        <p>Thank you for purchasing CodeIgniter CRUD - Data Management System, by 
+                            <a href="http://codecanyon.net/user/vudoanthang">vudoanthang</a>, 
+                            if you have any questions, please feel free to email via my user page contact form. 
+                            Thank you so much!</p>
+                        <h3>Quick start</h3>
+                        <ul>
+                        	<li>Copy codeignitercrud directory to application/third_party directory.</li>
+                        	<li>Copy media directtory to your public web directory. </li>
+                        	<li>Create an controller and action like bellow.</li>
+                        </ul>
+<pre class="prettyprint linenums">
+if (! defined ( 'BASEPATH' )) exit ( 'No direct script access allowed' );
+class Home extends CI_Controller {
+	public function index() { 
+		$this->load->add_package_path ( APPPATH . 'third_party/codeignitercrud/' );
+		$this->load->library ( 'CodeigniterCrud' );
+		
+		$this->codeignitercrud->table ( 'categories' );
+		$this->codeignitercrud->tableAlias ( 'Category Manager	' );
+		
+		$this->codeignitercrud->addNoCol ( true );
+		
+		$this->codeignitercrud->cols ( 'category_name' );
+		
+		$this->codeignitercrud->alias ( 'category_name', 'Name' );
+		$this->codeignitercrud->alias ( 'category_description', 'Description' );
+		
+		$this->codeignitercrud->type ( 'category_description', 'editor' );
+		
+		$this->codeignitercrud->validate ( 'category_name', 'required' );
+		
+		$this->codeignitercrud->search ( 'all' );
+		
+		$html = $this->codeignitercrud->fetch ();
+		
+		$this->load->view ( 'example1', array (	'html' => $html	) );
+	}
+}
+</pre>
+<p>
+<ul><li>Next, we create a example1 template .</li></ul>
+</p>
+<pre class="prettyprint linenums">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8"&gt;
+&lt;title&gt;CodeIgniter CRUD - Data Management System&lt;/title&gt;
+&lt;link href="&lt;?php echo base_url(); ?&gt;media/bootstrap/css/bootstrap.css" rel="stylesheet"&gt;
+&lt;link href="&lt;?php echo base_url(); ?&gt;media/bootstrap/css/bootstrap-responsive.css" rel="stylesheet"&gt;
+
+&lt;link href="&lt;?php echo base_url(); ?&gt;media/datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet"&gt;
+&lt;link href="&lt;?php echo base_url(); ?&gt;media/css/style.css" rel="stylesheet"&gt;
+
+&lt;link href="&lt;?php echo base_url(); ?&gt;media/tagmanager/bootstrap-tagmanager.css" rel="stylesheet"&gt;
+&lt;link href="&lt;?php echo base_url(); ?&gt;media/select2/select2.css" rel="stylesheet"&gt;
+
+&lt;script src="&lt;?php echo base_url(); ?&gt;media/js/jquery-1.8.2.min.js"&gt;&lt;/script&gt;
+&lt;script src="&lt;?php echo base_url(); ?&gt;media/bootstrap/js/bootstrap.js"&gt;&lt;/script&gt;
+&lt;script src="&lt;?php echo base_url(); ?&gt;media/ckeditor/ckeditor.js"&gt;&lt;/script&gt;
+
+&lt;script src="&lt;?php echo base_url(); ?&gt;media/datetimepicker/js/bootstrap-datetimepicker.min.js"&gt;&lt;/script&gt;
+&lt;script src="&lt;?php echo base_url(); ?&gt;media/tagmanager/bootstrap-tagmanager.js"&gt;&lt;/script&gt;
+&lt;script src="&lt;?php echo base_url(); ?&gt;media/select2/select2.js"&gt;&lt;/script&gt;
+
+&lt;script type="text/javascript" src="&lt;?php echo base_url(); ?&gt;media/fancybox/jquery.mousewheel-3.0.4.pack.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="&lt;?php echo base_url(); ?&gt;media/fancybox/jquery.fancybox-1.3.4.pack.js"&gt;&lt;/script&gt;
+&lt;link rel="stylesheet" type="text/css" href="&lt;?php echo base_url(); ?&gt;media/fancybox/jquery.fancybox-1.3.4.css" media="screen" /&gt;
+
+&lt;style&gt;
+body {
+	padding-top: 60px;
+	padding-bottom: 60px;
+}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;?php echo  $html;?&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+                      <h3>API</h3>
+                      <h4>table($table)</h4>
+                      <p>Sets the table from which data will be loaded</p>
+<pre class="prettyprint linenums">
+$this->codeignitercrud->table ( 'articles' ); // you can set your table.
+</pre>
+                      <h4>tableAlias($alias)</h4>
+                      <p>Set header name, Table name is header name if it is not set.</p>
+<pre class="prettyprint linenums">
+$this->codeignitercrud->tableAlias ( 'Article Manager' ); // your can define your header.
+</pre>
+<h4>type()</h4>
+                      <p>Set field type</p>
+                      <h5>1. text : type($field,'text',$attributes = array())</h5>
+                      <p></p>
+<pre class="prettyprint linenums">
+$this->codeignitercrud->type ( 'article_title', 'text', array ('class' => 'span6') );
+</pre>
+<h5>2. tag: type($field,'tag',$attributes = array())</h5>
+<pre class="prettyprint linenums">
+$this->codeignitercrud->type ( 'tag', 'tag', array (
+		'value' => 'PHP,C#'  // set default value
+) );
+</pre>
+<h5>3. textarea : type($field,'textarea',$attributes = array())</h5>
+<pre class="prettyprint linenums">
+$this->codeignitercrud->type ( 'article_summary', 'textarea', array (
+		'class' => 'span6',
+		'style' => 'height:10em;'
+) );	
+</pre>
+<h5>4. editor : type($field,'editor',$attributes = array())</h5>
+<pre class="prettyprint linenums">
+$this->codeignitercrud->type ( 'article_content', 'editor', array (
+		'width' => '700',
+		'height' => '400',
+) );
+</pre>
+<h5>5. date : type($field,'data',$attributes = array())</h5>
+<pre class="prettyprint linenums">
+$this->codeignitercrud->type ( 'article_date', 'date', array (
+		'data-format' => 'MM/dd/yyyy', // format date	
+		'value' => date ( 'm/d/Y', time () ) // default value
+) );
+</pre>
+<h5>6. datetime : type($field,'datetime',$attributes = array())</h5>
+<pre class="prettyprint linenums">
+$this->codeignitercrud->type ( 'date_time', 'datetime', array (
+		'data-format' => 'MM/dd/yyyy hh:mm:ss', // format date time
+		'value' => date ( 'm/d/Y H:i:s', time () ) // default value
+) );
+</pre>
+<h5>7. time : type($field,'time',$attributes = array())</h5>
+<pre class="prettyprint linenums">
+$this->codeignitercrud->type ( 'time', 'time', array (
+		'value' => date ( 'H:i:s', time () ) // default value
+) );
+</pre>
+<h5>8. radio : type($field,'radio',$options = array(),$attributes = array())</h5>
+<pre class="prettyprint linenums">
+$this->codeignitercrud->type ( 'radio', 'radio', array (
+		'Option 1',
+		'option 2'
+), array (
+		'value' => 1 // default value
+) );
+</pre>
+<h5>9. checkbox : type($field,'checkbox',$options = array(),$attributes = array())</h5>
+<pre class="prettyprint linenums">
+$this->codeignitercrud->type ( 'checkbox', 'checkbox', array (
+		'checkbox 1',
+		'checkbox 2'
+), array (
+		'value' => '1' // default value
+) );
+</pre>
+
+<h5>10. selectbox : type($field,'selectbox',$options = array(),$attributes = array())</h5>
+<pre class="prettyprint linenums">
+$this->codeignitercrud->type ( 'selectbox', 'selectbox', array (
+		'' => '',
+		'1' => 'option 1',
+		'2' => 'option 2'
+), array (
+		//'value' => '1', // default value
+		//'multiple'=>'multiple' // set multiple select	
+) );
+</pre>
+<h5>11. autocomplete : type($field,'autocomplete',$options = array(),$attributes = array())</h5>
+<pre class="prettyprint linenums">
+$this->codeignitercrud->type ( 'autocomplete', 'autocomplete', array (
+		'' => '',
+		'1' => 'option 1',
+		'2' => 'option 2'
+), array (
+		'value' => '2' // default value
+) );
+</pre>
+<h5>12. file : type($field,'file',$upload_path,$extensions = array())</h5>
+<pre class="prettyprint linenums">
+$this->codeignitercrud->type ( 'file', 'file',FCPATH . 'media/images' );
+</pre>
+<h5>13. image : type($field,'image',$upload_path,thumb,$width,$height,$extensions = array())</h5>
+<pre class="prettyprint linenums">
+$this->codeignitercrud->type ( 'image', 'image', FCPATH . 'media/images', 'large', 500, 700 );
+</pre>
+
+<h4>validate()</h4>
+                      <p>Set field validation</p>
+                      
+<h5>1. required : validate($field,'required')</h5>
+<pre class="prettyprint linenums">
+$this->codeignitercrud->validate('my_field','required');
+</pre>
+<h5>2. url : validate($field,'url')</h5>
+<pre class="prettyprint linenums">
+$this->codeignitercrud->validate('my_field','url');
+</pre>
+<h5>3. regex : validate($field,'regex',$regex,$msg)</h5>
+<pre class="prettyprint linenums">
+$this->codeignitercrud->validat('my_field','regex',"/^([0-9]{4}$/",'My error message.')
+</pre>
+<h5>4. numeric : validate($field,'numeric')</h5>
+<pre class="prettyprint linenums">
+$this->codeignitercrud->validate($field,'numeric');
+</pre>
+<h5>5. ip : validate($filed,'ip')</h5>
+<pre class="prettyprint linenums">
+$this->codeignitercrud->validate($filed,'ip');
+</pre>
+<h5>6. email : validate($field,'email')</h5>
+<pre class="prettyprint linenums">
+$this->codeignitercrud->validate($field,'email');
+</pre>
+<h5>7. date : validate($field,'date')</h5>
+<pre class="prettyprint linenums">
+$this->codeignitercrud->validate($field,'date');
+</pre>
+<h5>8. date_time : validate($field,'date_time')</h5>
+<pre class="prettyprint linenums">
+$this->codeignitercrud->validate($field,'date_time');
+</pre>
+<h5>9. alpha : validate($field,'alpha')</h5>
+<pre class="prettyprint linenums">
+$this->codeignitercrud->validate($field,'alpha');
+</pre>
+<h5>10. alpha_numeric : validate($field,'alpha_numeric')</h5>
+<pre class="prettyprint linenums">
+$this->codeignitercrud->validate($field,'alpha_numeric');
+</pre>
+                      <h4>join($type, $table, $condition)</h4>
+                      <p>This api help to join and manipulate with a few table.</p>
+                      <ul>
+                      	<li>$type: left | right | inner </li>
+                      	<li>$table: join table</li>
+                      	<li>$condition: join conditions</li>
+                      </ul>
+<pre class="prettyprint linenums">
+$this->codeignitercrud->join ( 'left', 'categories', 'categories.id = articles.category_id' );
+</pre>
+                      <h4>where($conditions,$param1,[$param2],[...])</h4>
+                      <p>Set the conditions. Multiple calls are united all the conditions with the operator 'AND'.</p>
+<pre class="prettyprint linenums">
+$this->codeignitercrud->where('(articles.category_id = ? or articles.category_id = ?)',1,3);
+$this->codeignitercrud->where('article_title like ?','%the%');
+</pre>
+                      <h4>order($field, $type = 'ASC')</h4>
+                      <p>Set default order. You can set multiple order.</p>
+<pre class="prettyprint linenums">
+$this->codeignitercrud->order ( 'id', 'DESC' );
+</pre>
+                      <h4>group($fields)</h4>
+                      <p>Set defalt group. You can set multiple group.</p>
+<pre class="prettyprint linenums">
+$this->codeignitercrud->group('my_field');
+</pre>
+                      
+                      <h4>limit($limit = 30)</h4>
+                      <p>Set the number records is show in one page. Default value is 20 recored.</p>
+<pre class="prettyprint linenums">
+$this->codeignitercrud->limit ( 30 );
+</pre>
+                      <h4>search($fields)</h4>
+                      <p>Set the field on search form</p>
+<pre class="prettyprint linenums">
+$this->codeignitercrud->search ( array (
+		'id',
+		'article_title',
+		'category_id',
+		'article_date',
+));
+
+$this->codeignitercrud->search('other_field');
+
+// or 
+$this->codeignitercrud->search('all'); // create search form with all field
+
+</pre>
+                      <h4>hideCol($fields)</h4>
+                      <p>Hide columns in the list records</p>
+<pre class="prettyprint linenums">
+$this->codeignitercrud->hideCol('file');
+</pre>
+                      
+                      <h4>readonly($fields)</h4>
+                      <p>Set the field is readonly on edit form</p>
+<pre class="prettyprint linenums">
+$this->codeignitercrud->readonly( 'tag' );
+</pre>
+                      <h4>cols($fields)</h4>
+                      <p>Set columns in the list records</p>
+<pre class="prettyprint linenums">
+$this->codeignitercrud->cols(array('article_title','article_date','article_summary'));
+</pre>
+                      <h4>csvCols($fields)</h4>
+                      <p>Set columns to export csv file</p>
+<pre class="prettyprint linenums">
+$this->codeignitercrud->csvCols ( array (
+		'id',
+		'file',
+		'article_date',
+		'article_title',
+		'categories.category_name',
+		'article_summary'
+) );
+</pre>
+                      <h4>excelCols($fields)</h4>
+                      <p>Set columns to export excel file</p>
+<pre class="prettyprint linenums">
+$this->codeignitercrud->excelCols ( array (
+		'id',
+		'file',
+		'article_date',
+		'article_title',
+		'categories.category_name',
+		'article_summary'
+) );
+</pre>
+                      <h4>setValue($field, $value)</h4>
+                      <p>Set value to field, It is used when record is added.</p>
+<pre class="prettyprint linenums">
+$this->codeignitercrud->setValue('tag', 'PHP,C#,C++,Java,HTML,CSS,Javascript');
+</pre>
+                      <h4>hide($arg)</h4>
+                      <p>Hide search | add | copy | edit | view | delete | print | csv | excel buttons.</p>
+<pre class ="prettyprint linenums">
+$this->codeignitercrud->hide('delete')
+	->hide('edit')
+ 	->hide('copy')
+ 	->hide('view')
+	->hide('add')
+	->hide('excel')
+	->hide('csv')
+	->hide('print')
+	->hide('search');
+</pre>
+                      <h4>subQuery($sql,$alias)</h4>
+                      <p>Create sub query.</p>
+<pre class="prettyprint linenums">
+$this->codeignitercrud->subQuery('select category_name from categories as c where c.id = categories.id', 'custom_category'); 
+// you can display custom_category by use cols api
+$this->codeignitercrud->cols(array('article_title','custom_category','article_date','article_summary'));
+</pre>
+                      <h4>autoType($flag)</h4>
+                      <p>Set detect mysql type to html form element. Default value is false.</p>
+<pre class="prettyprint linenums">
+$this->codeignitercrud->autoType(true);
+</pre>
+                      <h4>addNoCol($flag)</h4>
+                      <p>Add No. column in the list records. Default value is false.</p>
+<pre class="prettyprint linenums">
+$this->codeignitercrud->addNoCol(true);
+</pre>
+                      <h4>editorImageUploadPath($path = array())</h4>
+                      <p>Set upload image for editor.</p>
+<pre class="prettyprint linenums">
+$this->codeignitercrud->editorImageUploadPath(array(
+	'real' => dirname(__FILE__).'/media/images',
+	'public' => 'media/images'		
+));
+</pre>
+                      <h4>themePath($path)</h4>
+                      <p>Set the theme folder path.</p>
+<pre class="prettyprint linenums">
+$this->codeignitercrud->themePath('/path/theme_folder');
+</pre>
+                      <h4>theme($theme)</h4>
+                      <p>Set the CodeIgniter CRUD theme</p>
+<pre class="prettyprint linenums">
+$this->codeignitercrud->theme('theme_name');
+</pre>
+                      <h4>callback($callbackType,$function)</h4>
+                      <p>Callback api to help you add more function when it is running</p>
+<pre class="prettyprint linenums">
+$this->codeignitercrud->callback('BEFORE_INSERT','beforeInsert');
+$this->codeignitercrud->callback('AFTER_INSERT','afterInsert');
+$this->codeignitercrud->callback('BEFORE_UPDATE','beforeUpdate');
+$this->codeignitercrud->callback('AFTER_UPDATE','afterUpdate');
+$this->codeignitercrud->callback('BEFORE_DELETE','beforeDelete');
+$this->codeignitercrud->callback('AFTER_DELETE','afterDelete');
+
+
+function beforeInsert($this->codeignitercrud,$data){
+	// todo something...
+	
+	return $data;
+}
+
+function afterInsert($this->codeignitercrud,$data,$lastInsertId){
+	// todo something...
+}
+
+function beforeUpdate($this->codeignitercrud,$data){
+	// todo something...
+	
+	return $data;
+}
+
+function afterUpdate($this->codeignitercrud,$data,$lastInsertId){
+	// todo something...
+}
+
+function beforeDelete($this->codeignitercrud,$data){
+	// todo something...
+}
+
+function afterDelete($this->codeignitercrud,$data){
+	// todo something...
+}
+</pre>
+                      <h4>alias($alias, $value = '')</h4>
+                      <p>Set the alias field name.</p>
+<pre class="prettyprint linenums">
+$this->codeignitercrud->alias ( 'id', 'Id' )
+	->alias('category','Category')
+	->alias ( 'article_title', 'Title' )
+	->alias ( 'date_time', 'DateTime' )
+	->alias ( 'time', 'Time' )
+	->alias ( 'tag', 'Tags' )
+	->alias ( 'file', 'File' )
+	->alias ( 'image', 'Image' )
+	->alias ( 'selectbox', 'Select' )
+	->alias ( 'autocomplete', 'Autocomplete' )
+	->alias ( 'article_date', 'Date' )
+	->alias ( 'article_summary', 'Summary' )
+	->alias ( 'article_content', 'Content' )
+	->alias ( 'categories.category_name', 'Category' );
+</pre>
+                      <h4>colWith($field, $value)</h4>
+                      <p>Set the column with.</p>
+<pre class="prettyprint linenums">
+$this->codeignitercrud->colWith ( 'id', 40 );
+$this->codeignitercrud->colWith ( 'article_date', 100 );
+$this->codeignitercrud->colWith ( 'categories.category_name', 100 );
+$this->codeignitercrud->colWith ( 'article_title', 320 );
+$this->codeignitercrud->colWith ( 'image', 156 );
+</pre>
+                      <h4>colAlign($fields, $type = 'left')</h4>
+                      <p>Set the column align.</p>
+<pre class="prettyprint linenums">
+$this->codeignitercrud->colAlign ( 'id', 'center' );
+$this->codeignitercrud->colAlign ( 'custom', 'center' );
+$this->codeignitercrud->colAlign ( 'image', 'center' );
+$this->codeignitercrud->colAlign ( 'article_date', 'center' );
+$this->codeignitercrud->colAlign ( 'categories.category_name', 'center' );
+</pre>
+                      <h4>colFormat($field, $format)</h4>
+                      <p>Format the column data in the list record</p>
+<pre class="prettyprint linenums">
+$scrud->colFormat('datetime', array('MyClass','dateTimeFormat'));
+$scrud->colFormat('date', 'dateFormat');
+$scrud->colFormat('custom_field', 'Id:{id} Date:{date} datetime:{test.datetime}');  // {date} | {id} is field name
+
+function dateFormat($field,$value,$row,$CodeIgniter){
+	return date("d/m/Y",strtotime($value));
+}
+class MyClass{
+	public function dateTimeFormat($field,$value,$row,$CodeIgniter){
+		return date("d/m/Y H:i:s",strtotime($value));
+	}
+}
+</pre>
+                      <h4>fields($fields)</h4>
+                      <p>Set fields on form (add | edit | view | delete | copy)</p>
+<pre class="prettyprint linenums">
+$this->codeignitercrud->fields ( array (
+		'article_title',
+		'article_date',
+		'categories.category_name'
+) );
+$this->codeignitercrud->fields ( 'article_summary' )
+	->fields ( 'article_content' );
+</pre>
+                      <h4>disabled($fields)</h4>
+                      <p>Disable fields that don't show on form (add | edit | view | delete | copy)</p>
+<pre class="prettyprint linenums">
+$this->codeignitercrud->disabled ( 'categories.category_name' );
+</pre>
+                      <h4>fetch()</h4>
+                      <p>Get CodeIgniter CRUD html</p>
+<pre class="prettyprint linenums">
+$html = $this->codeignitercrud->fetch ();
+</pre>
+                      <br />
+                    </div>
+                </div>
+
+            </div>
+            <br /><br />
+        </div>
+    </body>
+</html>

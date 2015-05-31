@@ -1,0 +1,24 @@
+CodeIgniter CRUD - Data Management System v1.0 2013-10-04
+------------------------------
+- Use PHPExcel instead php-excel for excel export.
+	+ files are changed.
+		* source/codeignitercrud/library/PHPExcel (Added new) 
+		* source/codeignitercrud/library/PHPExcel.php (Added new)
+		* source/codeignitercrud/theme/bootstrap/index.php
+		* source/codeignitercrud/theme/bootstrap01/index.php
+
+CodeIgniter CRUD - Data Management System v1.0 2013-09-09
+------------------------------
+- Fixed an issue that display HTML on list page if the field is not editor type.
+	+ files are changed.
+		* source/codeignitercrud/theme/bootstrap/index.php
+    	* source/codeignitercrud/theme/bootstrap01/index.php
+
+CodeIgniter CRUD - Data Management System v1.0 2013-09-03
+- Fixed an issue on delete file or image.
+	+ files are changed.
+		* source/codeignitercrud/libraries/CodeigniterCrud.php
+
+CodeIgniter CRUD - Data Management System v1.0 2013-08-10
+------------------------------
+- release version 1.0
